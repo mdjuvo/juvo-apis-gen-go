@@ -1,0 +1,98 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/verificationcode/v1/verificationcode.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/verificationcode/{juvo_id}:send": {
+      "get": {
+        "summary": "Send the user a verification code.  Returns xxx if the user has exceeded the limit",
+        "operationId": "SendCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SendCodeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "juvo_id",
+            "description": "The ID of the user to send the verification code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VerificationCode"
+        ]
+      }
+    },
+    "/v1/verificationcode/{juvo_id}:verify": {
+      "get": {
+        "summary": "Verify that the code is correct",
+        "operationId": "VerifyCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1VerifyCodeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "juvo_id",
+            "description": "The ID of the user to send the verification code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "verification_code",
+            "description": "The verification code to test.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VerificationCode"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1SendCodeResponse": {
+      "type": "object",
+      "properties": {
+        "verification_code": {
+          "type": "string"
+        }
+      }
+    },
+    "v1VerifyCodeResponse": {
+      "type": "object",
+      "properties": {
+        "verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "True if the code is correct (just return 200?)"
+        }
+      }
+    }
+  }
+}

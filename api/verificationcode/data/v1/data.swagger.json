@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/verificationcode/data/v1/data.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/{juvo_id}:getLastCode": {
+      "get": {
+        "summary": "Returns the last verification code generated for this user",
+        "operationId": "GetLastCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1VerificationCode"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "juvo_id",
+            "description": "The ID of the user for which to fetch a verification code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VerificationCodeData"
+        ]
+      }
+    },
+    "/v1/{juvo_id}:insert": {
+      "post": {
+        "summary": "Returns the last verification code generated for this user",
+        "operationId": "InsertCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1InsertCodeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "juvo_id",
+            "description": "The ID of the user for which to fetch a verification code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VerificationCodeData"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1InsertCodeResponse": {
+      "type": "object",
+      "title": "Request message for VerificationCodeData.GetLastCode"
+    },
+    "v1VerificationCode": {
+      "type": "object",
+      "properties": {
+        "juvo_id": {
+          "type": "string",
+          "title": "The ID of the user associated with this verification code"
+        },
+        "verification_code": {
+          "type": "string",
+          "title": "The verification code"
+        }
+      },
+      "title": "Response message for VerificationCodeData.GetLastCode"
+    }
+  }
+}
